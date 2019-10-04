@@ -28,12 +28,23 @@ import "./assets/css/pe-icon-7-stroke.css";
 
 import AdminLayout from "layouts/Admin.jsx";
 
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+
+import rootReducer from './reducers/rootReducer';
+
+const store = createStore(rootReducer);
+
+
 ReactDOM.render(
-  <BrowserRouter>
-    <Switch>
-      <Route path="/admin" render={props => <AdminLayout {...props} />} />
-      <Redirect from="/" to="/admin/dashboard" />
-    </Switch>
-  </BrowserRouter>,
+
+  <Provider store={store}>
+    <BrowserRouter>
+      <Switch>
+        <Route path="/admin" render={props => <AdminLayout {...props} />} />
+        <Redirect from="/" to="/admin/dashboard" />
+      </Switch>
+    </BrowserRouter>
+  </Provider>,
   document.getElementById("root")
 );
